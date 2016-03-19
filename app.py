@@ -28,7 +28,36 @@ def make_figure():
     p.yaxis.axis_label = 'Price'
     p.legend.orientation = "top_left"
     return p
+
+import jinja2
+from bokeh.embed import components
+
+template = jinja2.Template("""
+<!DOCTYPE html>
+<html lang="en-US">
+
+<link
+    href="http://cdn.pydata.org/bokeh/release/bokeh-0.9.0.min.css"
+    rel="stylesheet" type="text/css"
+>
+<script 
+    src="http://cdn.pydata.org/bokeh/release/bokeh-0.9.0.min.js"
+></script>
+
+<body>
+
+    <h1>Hello Bokeh!</h1>
     
+    <p> Below is a simple plot of stock closing prices </p>
+    
+    {{ script }}
+    
+    {{ div }}
+
+</body>
+
+</html>
+""")
 
 from bokeh.embed import components 
 
@@ -44,7 +73,7 @@ def main():
 
 @app.route('/index')
 def index():
-  return render_template('graph.html', script=script, div=div)
+    return template.render(script=script, div=div)
 
 if __name__ == '__main__':
   app.run(port=33507)
