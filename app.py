@@ -29,7 +29,7 @@ def main():
 
 @app.route('/index')
 def index():
-  return render_template('graph.html')
+  return render_template('index.html')
 
 if __name__ == '__main__':
   app.run(port=33507)
