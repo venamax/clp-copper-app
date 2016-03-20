@@ -5,24 +5,24 @@ app = Flask(__name__)
 import pandas as pd
 from bokeh.plotting import figure
 
-AAPL = pd.read_csv(
+HUFF_POST = pd.read_csv(
     "http://ichart.yahoo.com/table.csv?s=AAPL&a=0&b=1&c=2000&d=0&e=1&f=2015",
     parse_dates=['Date'])
-MSFT = pd.read_csv(
+BUZZFEED = pd.read_csv(
     "http://ichart.yahoo.com/table.csv?s=MSFT&a=0&b=1&c=2000&d=0&e=1&f=2015",
     parse_dates=['Date'])
-IBM = pd.read_csv(
+UPWORTHY = pd.read_csv(
     "http://ichart.yahoo.com/table.csv?s=IBM&a=0&b=1&c=2000&d=0&e=1&f=2015",
     parse_dates=['Date'])
 
 def make_figure():
     p = figure(x_axis_type="datetime", width=700, height=300)
 
-    p.line(AAPL['Date'], AAPL['Adj Close'], color='#A6CEE3', legend='AAPL')
-    p.line(IBM['Date'], IBM['Adj Close'], color='#33A02C', legend='IBM')
-    p.line(MSFT['Date'], MSFT['Adj Close'], color='#FB9A99', legend='MSFT')
+    p.line(HUFF_POST['Date'], HUFF_POST['Adj Close'], color='#A6CEE3', legend='H_POST')
+    p.line(UPWORTHY['Date'], UPWORTHY['Adj Close'], color='#33A02C', legend='BUZZ')
+    p.line(BUZZFEED['Date'], BUZZFEED['Adj Close'], color='#FB9A99', legend='UPW')
 
-    p.title = "Stock Closing Prices"
+    p.title = "Likes per second on Videos on Facebook"
     p.grid.grid_line_alpha=0.3
     p.xaxis.axis_label = 'Date'
     p.yaxis.axis_label = 'Price'
@@ -46,9 +46,9 @@ template = jinja2.Template("""
 
 <body>
 
-    <h1>Hello Bokeh!</h1>
+    <h1>Test graph</h1>
     
-    <p> Below is a simple plot of stock closing prices </p>
+    <p> Displaying Likes per second on videos on Facebook </p>
     
     {{ script }}
     
@@ -76,4 +76,4 @@ def index():
     return template.render(script=script, div=div)
 
 if __name__ == '__main__':
-  app.run(port=33507)
+  app.run(host='0.0.0.0')
