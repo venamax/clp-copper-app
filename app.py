@@ -2,27 +2,26 @@ from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
 
+import Quandl
 import pandas as pd
 from bokeh.plotting import figure
 
-HUFF_POST = pd.read_csv(
-    "http://ichart.yahoo.com/table.csv?s=AAPL&a=0&b=1&c=2000&d=0&e=1&f=2015",
+CLP = pd.read_csv(
+    "https://www.quandl.com/api/v3/datasets/CUR/CLP.csv?auth_token=YSs68kZptR6x1EbHmf6R",
+    parse_dates=['DATE'])
+COPPER = pd.read_csv(
+    "https://www.quandl.com/api/v3/datasets/WSJ/COPPER.csv?auth_token=YSs68kZptR6x1EbHmf6R",
     parse_dates=['Date'])
-BUZZFEED = pd.read_csv(
-    "http://ichart.yahoo.com/table.csv?s=MSFT&a=0&b=1&c=2000&d=0&e=1&f=2015",
-    parse_dates=['Date'])
-UPWORTHY = pd.read_csv(
-    "http://ichart.yahoo.com/table.csv?s=IBM&a=0&b=1&c=2000&d=0&e=1&f=2015",
-    parse_dates=['Date'])
+
 
 def make_figure():
     p = figure(x_axis_type="datetime", width=700, height=300)
 
-    p.line(HUFF_POST['Date'], HUFF_POST['Adj Close'], color='#A6CEE3', legend='H_POST')
-    p.line(UPWORTHY['Date'], UPWORTHY['Adj Close'], color='#33A02C', legend='BUZZ')
-    p.line(BUZZFEED['Date'], BUZZFEED['Adj Close'], color='#FB9A99', legend='UPW')
+    p.line(CLP['DATE'], 1000/CLP['RATE'], color='#A6CEE3', legend='USD/1000_CLP')
+    p.line(COPPER['Date'], COPPER['Value'], color='#33A02C', legend='USD/1LB_COPPER')
 
-    p.title = "Likes per second on Videos on Facebook"
+
+    p.title = "Day Closing Prices"
     p.grid.grid_line_alpha=0.3
     p.xaxis.axis_label = 'Date'
     p.yaxis.axis_label = 'Price'
@@ -46,9 +45,9 @@ template = jinja2.Template("""
 
 <body>
 
-    <h1>Test graph</h1>
+    <h1>Hypothesis: There are arbitrage opportunities between the Chilean Peso and the price of Copper</h1>
     
-    <p> Displaying Likes per second on videos on Facebook </p>
+    <p> Historical Prices in USD </p>
     
     {{ script }}
     
