@@ -6,9 +6,9 @@ app = Flask(__name__)
 import pandas as pd
 from bokeh.plotting import figure
 
-##CLP = pd.read_csv(
-##    "https://www.quandl.com/api/v3/datasets/CUR/CLP.csv?auth_token=YSs68kZptR6x1EbHmf6R",
-##    parse_dates=['DATE'])
+CLP = pd.read_csv(
+    "CUR-CLP.csv",
+    parse_dates=['DATE'])
 COPPER = pd.read_csv(
     "COPPER.csv",
     parse_dates=['Date'])
@@ -17,7 +17,7 @@ COPPER = pd.read_csv(
 def make_figure():
     p = figure(x_axis_type="datetime", width=700, height=300)
 
-##    p.line(CLP['DATE'], 1000/CLP['RATE'], color='#A6CEE3', legend='USD/1000_CLP')
+    p.line(CLP['DATE'], 1000/CLP['RATE'], color='#A6CEE3', legend='USD/1000_CLP')
     p.line(COPPER['Date'], COPPER['Value'], color='#33A02C', legend='USD/1LB_COPPER')
 
 
