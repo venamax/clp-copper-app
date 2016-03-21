@@ -17,7 +17,7 @@ COPPER = pd.read_csv(
 def make_figure():
     p = figure(x_axis_type="datetime", width=700, height=300)
 
-    p.line(CLP['DATE'], 1000/CLP['RATE'], color='#A6CEE3', legend='USD/1000_CLP')
+    p.line(CLP['DATE'], 1000/CLP['RATE'], color='#FF0000', legend='USD/1000_CLP')
     p.line(COPPER['Date'], COPPER['Value'], color='#33A02C', legend='USD/1LB_COPPER')
 
 
