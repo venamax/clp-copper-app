@@ -18,6 +18,63 @@ COPPER.index = COPPER['Date']
 df_clp_copper= CLP.join(COPPER, how = 'inner', lsuffix='_x')
 df = df_clp_copper
 
+
+periods = []
+test_periods = []
+k = 0
+z = 0
+for i in range (2007,2017):
+    for j in range(1,13):
+        t = pd.to_datetime(str(i)+'-'+ str(j)+'-'+'01')   
+        periods.append(t)
+periods = periods[5:-10]
+
+def PlotUnivariateFitAndResids(X, Y, preds, preds_sorted,i):
+
+    dims = (16, 32)
+    plt.subplots(figsize=dims)
+    plt.subplot(2, 1, 1) 
+    plt.scatter(np.ravel(X[:,0]), np.ravel(Y))
+    plt.plot(np.sort(X[:,0], 0), preds_sorted, 'r', linewidth=3.5)
+    plt.title("Regression Line - Copper Prices vs USD/1000CLP")
+    plt.ylabel('USD per 1000 CLP')
+    plt.xlabel('USD per lb of copper')
+
+    plt.subplot(2, 1, 2)
+    resid = np.ravel(Y) - preds
+    plt.scatter(np.ravel(X[:,0]), resid)
+    plt.title("Residual Plot")
+    plt.ylabel('USD per 1000 CLP')
+    plt.xlabel('USD per lb of copper')
+
+    plt.savefig("lmmodel%s.png"%i)
+    plt.show()
+
+## fit linear regression model
+def LinearRegressionFitAndPlot(X, Y,i):
+    lm = LinearRegression()
+    lm.fit(X, Y)
+    preds = lm.predict(X)
+    preds_sorted = lm.predict(np.sort(X, 0))
+
+    PlotUnivariateFitAndResids(X, Y, preds, preds_sorted,i)
+    return lm
+
+
+def LinearRegressionPred(X, Y):
+    lm = LinearRegression()
+    lm.fit(X, Y)
+    preds = lm.predict(X)
+    preds_sorted = lm.predict(np.sort(X, 0))
+
+    return preds_sorted
+
+def LinearModelSimplePredictor(X, Y):
+    lm = LinearRegression()
+    lm.fit(X, Y)
+
+    return lm
+
 def plot_indexes():
     p = figure(x_axis_type="datetime", width=700, height=300)
 
