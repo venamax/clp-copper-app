@@ -142,11 +142,11 @@ template = jinja2.Template("""
 <html lang="en-US">
 
 <link
-    href="http://cdn.pydata.org/bokeh/release/bokeh-0.11.1.min.css"
+    href="http://cdn.pydata.org/bokeh/release/bokeh-0.9.2.min.css"
     rel="stylesheet" type="text/css"
 >
 <script 
-    src="http://cdn.pydata.org/bokeh/release/bokeh-0.11.1.min.js"
+    src="http://cdn.pydata.org/bokeh/release/bokeh-0.9.2.min.js"
 ></script>
 
 <body>
