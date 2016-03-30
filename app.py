@@ -8,10 +8,9 @@ from bokeh.palettes import Spectral11
 import numpy as np
 from bokeh.plotting import figure, show
 from sklearn.linear_model import LinearRegression
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib as mpl
-import seaborn as sns
+
+
+
 matplotlib.rcParams['savefig.dpi'] = 2 * matplotlib.rcParams['savefig.dpi']
 
 
