@@ -159,13 +159,13 @@ template = jinja2.Template("""
     
     {{ div }}
 
-    {{ script1 }}
+    {{ script }}
     
-    {{ div1 }}
+    {{ div }}
     
-    {{ script2 }}
+    {{ script }}
     
-    {{ div2 }}
+    {{ div }}
 
 
 
@@ -180,11 +180,11 @@ plot1 = plot_indexes()
 script, div = components(plot1)
 
 
-plot2 = plot_clp_vs_copper()
-script1, div1 = components(plot2)
+##plot2 = plot_clp_vs_copper()
+##script1, div1 = components(plot2)
 
-plot3 = plot_actual_vs_pred()
-script2, div2 = components(plot3)
+##plot3 = plot_actual_vs_pred()
+##script2, div2 = components(plot3)
 
 
 
