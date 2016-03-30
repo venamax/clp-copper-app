@@ -49,9 +49,8 @@ def plot_clp_vs_copper():
     p.yaxis.axis_label = 'USD/1000 CLP'
  
  def plot_actual_vs_pred():
-     
-     p = figure( x_axis_type="datetime",width=700, height=300)
-     for i in range(68):
+    p = figure( x_axis_type="datetime",width=700, height=300)
+    for i in range(68):
          df_set = df[(df.index>periods[i]) & (df.index< periods[i+36])]
          train_set = np.transpose(np.array(df_set['USD/LB COPPER'])[np.newaxis]) 
          label_set = np.array(df_set['USD/1000CLP'])
@@ -63,10 +62,10 @@ def plot_clp_vs_copper():
          p.circle(df_set.index,df_set['USD/1000CLP'] , color=str(c), legend='Actual', fill_alpha=0.2, size=1)
          p.line(df_predict.index ,df_pred, color='#FF0000', legend='Predicted', line_width=1)
          p.legend.orientation = "top_left"  
-     p.title = "Day Closing Prices"
-     p.grid.grid_line_alpha=0.3
-     p.xaxis.axis_label = 'Dates'
-     p.yaxis.axis_label = 'USD/1000 CLP'
+    p.title = "Day Closing Prices"
+    p.grid.grid_line_alpha=0.3
+    p.xaxis.axis_label = 'Dates'
+    p.yaxis.axis_label = 'USD/1000 CLP'
         
 
 import jinja2
@@ -90,17 +89,17 @@ template = jinja2.Template("""
     
     <p> Historical Prices in USD </p>
     
+    {{ script }}
+    
+    {{ div }}
+
     {{ script1 }}
     
     {{ div1 }}
-
+    
     {{ script2 }}
     
     {{ div2 }}
-    
-    {{ script3 }}
-    
-    {{ div3 }}
 
 
 
@@ -112,14 +111,14 @@ template = jinja2.Template("""
 from bokeh.embed import components 
 
 plot1 = plot_indexes()
-script1, div1 = components(plot1)
+script, div = components(plot1)
 
 
 plot2 = plot_clp_vs_copper()
-script2, div2 = components(plot2)
+script1, div1 = components(plot2)
 
 plot3 = plot_actual_vs_pred()
-script3, div3 = components(plot3)
+script2, div2 = components(plot3)
 
 
 
