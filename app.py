@@ -13,7 +13,9 @@ CLP = pd.read_csv(
 COPPER = pd.read_csv(
     "COPPER.csv",
     parse_dates=['Date'])
-
+CLP.index = CLP['DATE']
+COPPER.index = COPPER['Date']
+df_clp_copper= CLP.join(COPPER, how = 'inner', lsuffix='_x')
 
 def plot_indexes():
     p = figure(x_axis_type="datetime", width=700, height=300)
