@@ -11,8 +11,6 @@ from sklearn.linear_model import LinearRegression
 
 
 
-matplotlib.rcParams['savefig.dpi'] = 2 * matplotlib.rcParams['savefig.dpi']
-
 
 
 CLP = pd.read_csv(
