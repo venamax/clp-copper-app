@@ -48,7 +48,7 @@ def plot_clp_vs_copper():
     p.xaxis.axis_label = 'USD/LB COPPER'
     p.yaxis.axis_label = 'USD/1000 CLP'
  
- def plot_actual_vs_pred():
+def plot_actual_vs_pred():
     p = figure( x_axis_type="datetime",width=700, height=300)
     for i in range(68):
          df_set = df[(df.index>periods[i]) & (df.index< periods[i+36])]
